@@ -34,7 +34,51 @@ namespace ImageStore
 
         private void btnInserirImagem_Click(object sender, EventArgs e)
         {
+            string conexao = "server=localhost; User id=root; password=; database=imagens_db;";
+            //Faz conexão com a base de dados
+            MySqlConnection conn = new MySqlConnection(conexao);
+            //Cria comando que será executado
+            MySqlCommand comando;
+            //Guarda o arquivo na base de dados
+            MemoryStream memoryStream = new MemoryStream();
 
+            try
+            {
+                picImagem.Image.Save(memoryStream, picImagem.Image.RawFormat);
+                byte[] data = memoryStream.ToArray();
+
+                string sql = "INSERT INTO tabela_imagens (nome, imagem) VALUES (@nome, @imagem)";
+
+                conn.Open();
+                comando = new MySqlCommand(sql, conn);
+                comando.Parameters.Add("@nome", MySqlDbType.String);
+                comando.Parameters.Add("@imagem", MySqlDbType.Blob);
+                comando.Parameters["@nome"].Value = txtNomeImagem.Text;
+                comando.Parameters["@imagem"].Value = data;
+
+                if (comando.ExecuteNonQuery() == 1)
+                {
+                    labelResultado.Text = "Imagem inserida com sucesso!";
+                    labelResultado.ForeColor = Color.Green;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                labelResultado.Text = $"Erro ao conectar. \n {ex.Message}";
+                labelResultado.ForeColor = Color.Red;
+            }
+            finally 
+            { 
+                conn.Close();
+                memoryStream.Dispose();
+            }
+
+            picImagem.Image = null;
+            txtNomeImagem.Text = null;
+            btnInserirImagem.Enabled = false;
+            txtNomeImagem.Enabled = false;
         }
     }
 }
