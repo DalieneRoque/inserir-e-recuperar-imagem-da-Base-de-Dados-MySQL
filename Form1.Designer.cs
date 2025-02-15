@@ -84,6 +84,7 @@
             btnInserirImagem.TabIndex = 4;
             btnInserirImagem.Text = "Inserir Imagem";
             btnInserirImagem.UseVisualStyleBackColor = true;
+            btnInserirImagem.Click += btnInserirImagem_Click;
             // 
             // btnRecuperarImagem
             // 

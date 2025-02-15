@@ -31,5 +31,10 @@ namespace ImageStore
                 labelResultado.ForeColor = Color.Red;
             }
         }
+
+        private void btnInserirImagem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
