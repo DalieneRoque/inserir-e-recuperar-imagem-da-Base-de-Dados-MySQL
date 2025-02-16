@@ -94,6 +94,7 @@
             btnRecuperarImagem.TabIndex = 5;
             btnRecuperarImagem.Text = "Recuperar Imagem";
             btnRecuperarImagem.UseVisualStyleBackColor = true;
+            btnRecuperarImagem.Click += btnRecuperarImagem_Click;
             // 
             // Form1
             // 

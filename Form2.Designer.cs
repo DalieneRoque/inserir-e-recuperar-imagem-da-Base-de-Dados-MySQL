@@ -35,6 +35,7 @@
             listaImagem = new DataGridView();
             id = new DataGridViewTextBoxColumn();
             nome = new DataGridViewTextBoxColumn();
+            labelResultado = new Label();
             ((System.ComponentModel.ISupportInitialize)picImagem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)listaImagem).BeginInit();
             SuspendLayout();
@@ -75,6 +76,7 @@
             btnFechar.TabIndex = 6;
             btnFechar.Text = "Fechar";
             btnFechar.UseVisualStyleBackColor = true;
+            btnFechar.Click += btnFechar_Click;
             // 
             // listaImagem
             // 
@@ -108,18 +110,29 @@
             nome.Name = "nome";
             nome.ReadOnly = true;
             // 
+            // labelResultado
+            // 
+            labelResultado.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelResultado.Location = new Point(22, 22);
+            labelResultado.Name = "labelResultado";
+            labelResultado.Size = new Size(572, 293);
+            labelResultado.TabIndex = 8;
+            labelResultado.TextAlign = ContentAlignment.MiddleCenter;
+            labelResultado.Visible = false;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(621, 535);
+            Controls.Add(labelResultado);
             Controls.Add(listaImagem);
             Controls.Add(btnFechar);
             Controls.Add(btnSalvar);
             Controls.Add(btnExcluir);
             Controls.Add(picImagem);
             Name = "Form2";
-            Text = "Form2";
+            Text = "Imagens na Base de Dados";
             ((System.ComponentModel.ISupportInitialize)picImagem).EndInit();
             ((System.ComponentModel.ISupportInitialize)listaImagem).EndInit();
             ResumeLayout(false);
@@ -134,5 +147,6 @@
         private DataGridView listaImagem;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn nome;
+        private Label labelResultado;
     }
 }

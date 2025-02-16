@@ -69,8 +69,8 @@ namespace ImageStore
                 labelResultado.Text = $"Erro ao conectar. \n {ex.Message}";
                 labelResultado.ForeColor = Color.Red;
             }
-            finally 
-            { 
+            finally
+            {
                 conn.Close();
                 memoryStream.Dispose();
             }
@@ -79,6 +79,14 @@ namespace ImageStore
             txtNomeImagem.Text = null;
             btnInserirImagem.Enabled = false;
             txtNomeImagem.Enabled = false;
+        }
+
+        private void btnRecuperarImagem_Click(object sender, EventArgs e)
+        {
+            Close();
+            Thread t = new Thread(() => Application.Run(new Form2()));
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
         }
     }
 }
