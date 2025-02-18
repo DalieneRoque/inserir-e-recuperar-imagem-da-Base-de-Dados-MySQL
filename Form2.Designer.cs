@@ -96,6 +96,7 @@
             listaImagem.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             listaImagem.Size = new Size(419, 184);
             listaImagem.TabIndex = 7;
+            listaImagem.SelectionChanged += listaImagem_SelectionChanged;
             // 
             // id
             // 
