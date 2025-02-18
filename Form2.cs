@@ -72,7 +72,7 @@ namespace ImageStore
 
             try
             {
-                string id = listaImagem.SelectedRows[0].Cells[0].Value.ToString();
+                string id = listaImagem.SelectedRows[0].Cells[0].Value.ToString()!;
                 string sqll = $"SELECT * FROM tabela_imagens WHERE id LIKE {id}";
 
                 DataTable dt = new DataTable();
@@ -88,10 +88,50 @@ namespace ImageStore
                 labelResultado.Text = $"Erro ao recuperar a imagem do registro. \n {ex.Message}";
                 labelResultado.Visible = true;
             }
-            finally 
+            finally
             {
                 conn.Close();
             }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            string conexao = "server=localhost; User id=root; password=; database=imagens_db;";
+            //Faz conexão com a base de dados
+            MySqlConnection conn = new MySqlConnection(conexao);
+
+            string id = listaImagem.SelectedRows[0].Cells[0].Value.ToString()!;
+            string sqll = $"DELETE FROM tabela_imagens WHERE id = '{id}'";
+
+            try
+            {
+                conn.Open() ;
+                MySqlCommand cmd = new MySqlCommand(sqll, conn);
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    if (listaImagem.Rows.Count > 1)
+                    {
+                        picImagem.Image = null;
+                        listaImagem.Rows.Remove(listaImagem.SelectedRows[0]);
+                    }
+                    else
+                    { 
+                        btnFechar_Click(sender, e);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                labelResultado.Text = $"Erro ao excluir a imagem do registro. \n {ex.Message}";
+                labelResultado.Visible = true;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
         }
     }
 }

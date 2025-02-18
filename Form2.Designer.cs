@@ -52,12 +52,14 @@
             // 
             // btnExcluir
             // 
+            btnExcluir.Enabled = false;
             btnExcluir.Location = new Point(437, 335);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(172, 60);
             btnExcluir.TabIndex = 4;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 
