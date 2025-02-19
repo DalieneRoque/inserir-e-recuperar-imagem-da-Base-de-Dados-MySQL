@@ -105,7 +105,7 @@ namespace ImageStore
 
             try
             {
-                conn.Open() ;
+                conn.Open();
                 MySqlCommand cmd = new MySqlCommand(sqll, conn);
 
                 if (cmd.ExecuteNonQuery() > 0)
@@ -116,7 +116,7 @@ namespace ImageStore
                         listaImagem.Rows.Remove(listaImagem.SelectedRows[0]);
                     }
                     else
-                    { 
+                    {
                         btnFechar_Click(sender, e);
                     }
 
@@ -132,6 +132,29 @@ namespace ImageStore
                 conn.Close();
             }
 
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            labelResultado.Text = "";
+            labelResultado.Visible = false;
+
+            try
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Imagem JPG|*.jpg|Imagem PNG|*.png";
+                dialog.FileName = listaImagem.SelectedRows[0].Cells[1].Value.ToString();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    picImagem.Image.Save(dialog.FileName);
+                }
+          
+            }
+            catch (Exception ex)
+            {
+                labelResultado.Text = $"Erro ao salvar a imagem em arquivo. \n {ex.Message}";
+                labelResultado.Visible = true;
+            }
         }
     }
 }
